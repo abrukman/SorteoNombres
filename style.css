@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.estilo-papelito {
+    width: 150px;
+    height: 50px;
+    background-color: cornsilk;
+    color: black;
+    text-align: center;
+    font-size: larger;
+    line-height: 50px;
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.btn-nuevo-papelito {
+    display: none;
+}
+
+.bolsa {
+    width: 300px;
+    height: 600px;
+    background-color: peachpuff;
+    border: 1.5px solid black;
+    margin: 200px auto;
+    
+}
