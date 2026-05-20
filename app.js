@@ -1,3 +1,24 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBCmtf50PzBbFjUJdSbWV_XolyuZ4ugK98",
+  authDomain: "sorteonombres.firebaseapp.com",
+  projectId: "sorteonombres",
+  storageBucket: "sorteonombres.firebasestorage.app",
+  messagingSenderId: "1056897583978",
+  appId: "1:1056897583978:web:6bcbe93ccd4cd9c3107313"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
 function configurarPapelito(papelito) {
     papelito.id = "papelito";
     papelito.classList.add("estilo-papelito");
@@ -8,6 +29,13 @@ function configurarPapelito(papelito) {
         papelito.focus();
         papelito.draggable = false;
     });
+
+    papelito.addEventListener('keydown', (evento) => {
+        if (evento.key === "Enter") {
+            evento.preventDefault();
+            papelito.blur();
+        }
+    })
 
     papelito.addEventListener("blur", () => {
         papelito.draggable = true;
@@ -40,17 +68,20 @@ bolsa.addEventListener("dragover", (event) => {
     event.preventDefault();
 });
 
-bolsa.addEventListener("drop", (event) => {
+bolsa.addEventListener("drop", async (event) => {
     event.preventDefault();
     const idPapelito = event.dataTransfer.getData("text/plain");
     const papelito = document.getElementById(idPapelito);
     const nombreNormalizado = papelito.textContent.toLowerCase().trim();
-    if (!nombres.includes(nombreNormalizado)) {
-        nombres.push(nombreNormalizado);
-        alert(`Ingresaste ${nombreNormalizado} a la bolsa, ya está participando!`);
+
+    const q = query(collection(db, "nombres"), where("nombre", "==", nombreNormalizado));
+    const consulta = await getDocs(q);
+    if (consulta.empty) {
+        await addDoc(collection(db, "nombres"), { nombre: nombreNormalizado });
+        alert(`Ingresaste ${nombreNormalizado} a la bolsa!`);
         papelito.remove();
         btnNuevoPapelito.style.display = "block";
     } else {
-        alert(`El nombre ${nombreNormalizado} ya está participando del sorteo, probá ingresar otro nombre.`)
+        alert(`${nombreNormalizado[0].toUpperCase()}${nombreNormalizado.slice(1)} ya está participando del sorteo, probá ingresar otro nombre.`);
     };
 });
