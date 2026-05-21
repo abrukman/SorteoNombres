@@ -5,6 +5,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.contenedor-papelito {
+    position: relative;
+}
+
 .estilo-papelito {
     width: 150px;
     height: 50px;
@@ -17,6 +21,24 @@
     cursor: pointer;
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.toast-error {
+    position: absolute;
+    bottom: -20px;
+    right: -0px;
+    left: -0px;
+    width: 30%;
+    margin: 2px auto;
+    border: .5px solid red;
+    border-radius: 5px;
+    text-align: center;
+    color: red;
+    font-size: small;
+}
+
+.oculto {
+    display: none;
 }
 
 .btn-nuevo-papelito {
