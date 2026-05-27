@@ -7,14 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <h1>Escribí un nombre en un papelito y metelo en la bolsa para participar</h1>
-
-        <div id="papelito" class="estilo-papelito" draggable="true" contenteditable="false"></div>
-        <button id="nuevo-papelito" class="btn-nuevo-papelito">Otro papelito!</button>
-
-        <div id="bolsa" class="bolsa"></div>
-    </div>
+    <main class="escritorio">
+        <h1 class="titulo">Escribí un nombre en un papelito y metelo en la bolsa para participar</h1>
+        <section id="container" class="zona-papelito">
+            <div id="papelito" class="estilo-papelito" draggable="true" contenteditable="false"></div>
+        </section>    
+        <aside class="zona-bolsa">
+            <div id="bolsa" class="bolsa">
+                <img src="img/logo2025.svg" alt="logo" class="logo-bolsa">
+            </div>
+            <button id="nuevo-papelito" class="btn-nuevo-papelito">Otro papelito!</button>
+        </aside>    
+    </main>
     <script type="module" src="app.js"></script>
 </body>
 </html>
