@@ -15,6 +15,10 @@ const db = getFirestore(app);
 
 const listaNombres = document.getElementById("lista-nombres");
 const btnSortear = document.getElementById("sortear");
+const modalGanador = document.getElementById("modal-ganador");
+const textoGanador = document.getElementById("nombre-ganador-texto");
+const btnCerrarModal = document.getElementById("cerrar-modal");
+
 
 let nombres = [];
 
@@ -28,9 +32,20 @@ function escucharNombres() {
 
             nombres.push(nombre);
 
-            const nuevoNombre = document.createElement("li");
+            const texturas = ["pattern-liso", "pattern-rayado", "pattern-cuadriculado"];
+            const formas = ["shape-rasgado-1", "shape-rasgado-2", "shape-rasgado-3"];
+            const texturaAlAzar = texturas[Math.floor(Math.random() * texturas.length)];
+            const formaAlAzar = formas[Math.floor(Math.random() * formas.length)];
+
+            const nuevoLiNombre = document.createElement("li");
+            const nuevoNombre = document.createElement("span");
+            nuevoNombre.classList.add(texturaAlAzar);
+            nuevoNombre.classList.add(formaAlAzar);
+            nuevoNombre.classList.add("estilo-papelito");
+            nuevoNombre.classList.add("estilo-papelito-admin");
             nuevoNombre.textContent = nombre;
-            listaNombres.appendChild(nuevoNombre);
+            nuevoLiNombre.appendChild(nuevoNombre);
+            listaNombres.appendChild(nuevoLiNombre);
             
         });
     })
@@ -45,8 +60,14 @@ function realizarSorteo() {
     const indiceAleatorio = Math.floor(Math.random() * nombres.length);
 
     const ganador = nombres[indiceAleatorio];
+    textoGanador.textContent = ganador;
 
-    alert(`${ganador[0].toUpperCase()}${ganador.slice(1)} es el ganador!`);
+    modalGanador.showModal();
+    btnCerrarModal.addEventListener("click", () => {
+        modalGanador.close();
+    });
+
+    //alert(`${ganador[0].toUpperCase()}${ganador.slice(1)} es el ganador!`);
 }
 
 btnSortear.addEventListener("click", () => {

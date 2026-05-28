@@ -15,11 +15,11 @@ body {
     background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%);
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
 }
 
 .titulo {
     position: absolute;
-    color: white;
     bottom: 100px;
 }
 
@@ -73,6 +73,11 @@ body {
     background-color: var(--color-papel-base);
 }
 
+.estilo-papelito-admin {
+    user-select: none;
+    cursor: none;
+}
+
 .pattern-liso {
     background-color: var(--color-papel-base);
 }
@@ -83,7 +88,7 @@ body {
         transparent,
         transparent 24px,
         var(--color-linea-notebook) 24px,
-        var(--color-linea-notebook) 25px,
+        var(--color-linea-notebook) 25px
     );
     line-height: 25px;
 }
@@ -225,4 +230,111 @@ body {
     opacity: 0.8;
     filter: contrast(1.2) blur(0.5px);
     transform: rotate(-3deg);
+}
+
+dialog {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background-color: var(--color-papel-base);
+    max-width: 90%;
+    width: 500px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+}
+
+.contenido-modal {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.titulo-ganador {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: black;
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+#nombre-ganador-texto {
+    font-size: 5rem;
+    font-weight: bold;
+    color: #d13438;
+    margin: 20px 0;
+    text-transform: uppercase;
+    line-height: 1.1;
+    word-break: break-word;
+}
+
+#cerrar-modal {
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    background-color: #2b3a32;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s, background-color 0.2s;
+}
+
+#cerrar-modal:hover {
+    background-color: #3f5449;
+}
+
+#cerrar-modal:active {
+    transform: scale(0.95);
+}
+
+.mesa-admin {
+    list-style: none;
+    padding: 0;
+    margin: 40px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.mesa-admin li {
+    filter: drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.4));
+    transition: transform 0.2s ease;
+}
+
+.mesa-admin li:nth-child(odd) {
+    transform: rotate(-3deg) translateY(2px);
+}
+.mesa-admin li:nth-child(even) {
+    transform: rotate(4deg) translateX(1px);
+}
+.mesa-admin li:nth-child(3n) {
+    transform: rotate(-1deg) translateY(-3px);
+}
+
+.mesa-admin li:hover {
+    transform: rotate(0deg) scale(1.1);
+    z-index: 5;
+}
+
+.btn-sortear {
+    position: relative;
+    left: 50%;
+    margin-top: 50px;
+    transform: translateX(-50%);
+    background-color: #f4ecd8;
+    color: #333;
+    border: 2px solid #c19a6b;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-family: 'Comic Sans MS', cursive;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+    margin-bottom: 30px;
 }

@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteo Admin</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div>
         <h1>Lista de participantes</h1>
-        <ul id="lista-nombres"></ul>
-        <button id="sortear">sortear</button>
+        <ul id="lista-nombres" class="mesa-admin"></ul>
+        <button id="sortear" class="btn-sortear">sortear</button>
     </div>
+    <dialog id="modal-ganador">
+    <div class="contenido-modal">
+        <h2 class="titulo-ganador">¡Tenemos un Ganador! 🎉</h2>
+        <p id="nombre-ganador-texto"></p> 
+        <button id="cerrar-modal">Cerrar</button>
+    </div>
+</dialog>
 </body>
 <script type="module" src="admin.js"></script>
 </html>
