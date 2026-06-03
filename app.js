@@ -101,6 +101,12 @@ function configurarPapelito(papelito) {
         evento.dataTransfer.dropEffect = "move";
         evento.dataTransfer.setData("text/plain", evento.target.id);
     });
+
+    //logica touch dedos
+    papelito.addEventListener('touchstart', iniciarArrastre, { passive: false });
+    papelito.addEventListener('touchmove', moverPapelito, { passive: false });
+    papelito.addEventListener('touchend', soltarPapelito);
+
 }
 
 function limpiarAcentos(texto) {
@@ -113,6 +119,88 @@ function limpiarAcentos(texto) {
     .replace(/##enye_may##/, "Ñ");
 }
 
+async function procesarPapelito(papelito) {
+    const nombreNormalizado = limpiarAcentos(papelito.textContent.toLowerCase().trim());
+
+    if(!reglaNombre.test(nombreNormalizado)) {
+        alert(`El nombre ${nombreNormalizado} no es un nombre válido para participar del sorteo. Los nombres solo pueden tener letras y/o espacios`);
+        return false;
+    };
+
+    const q = query(collection(db, "nombres"), where("nombre", "==", nombreNormalizado));
+    const consulta = await getDocs(q);
+
+    if (consulta.empty) {
+        await addDoc(collection(db, "nombres"), { nombre: nombreNormalizado });
+        alert(`Ingresaste ${nombreNormalizado} a la bolsa!`);
+        papelito.remove();
+        btnNuevoPapelito.style.display = "block";
+        return true;
+    } else {
+        alert(`${nombreNormalizado[0].toUpperCase()}${nombreNormalizado.slice(1)} ya está participando del sorteo, probá ingresar otro nombre.`);
+        return false;
+    };
+}
+
+let inicioX = 0;
+let inicioY = 0;
+let offsetX = 0;
+let offsetY = 0;
+let papelitoActual = null;
+
+function iniciarArrastre(e) {
+    papelitoActual = e.target.closest('#papelito');
+    if (!papelitoActual) return;
+
+    const toque = e.touches[0];
+
+    inicioX = toque.clientX - offsetX;
+    inicioY = toque.clientY - offsetY;
+    
+    papelitoActual.style.transition = 'none';
+    papelitoActual.style.zIndex = '1000';
+}
+
+function moverPapelito(e) {
+    if (!papelitoActual) return;
+    
+    e.preventDefault();
+    
+    const toque = e.touches[0];
+
+    offsetX = toque.clientX - inicioX;
+    offsetY = toque.clientY - inicioY;
+
+    papelitoActual.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(-5deg)`;
+}
+
+async function soltarPapelito(e) {
+    if (!papelitoActual) return;
+
+    const toque = e.changedTouches[0];
+
+    papelitoActual.style.display = 'none';
+    const elementoDebajo = document.elementFromPoint(toque.clientX, toque.clientY);
+    papelitoActual.style.display = 'block';
+
+    if (elementoDebajo && elementoDebajo.closest('#bolsa')) {
+        const ingresoExitoso = await procesarPapelito(papelitoActual);
+
+        if (!ingresoExitoso) {
+            papelitoActual.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            papelitoActual.style.transform = 'translate(0px, 0px) rotate(0deg)';
+        }
+    } else {
+        papelitoActual.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        papelitoActual.style.transform = 'translate(0px, 0px) rotate(0deg)';
+    };
+
+    papelitoActual.style.zIndex = '1';
+    papelitoActual = null;
+    offsetX = 0;
+    offsetY = 0;
+}
+
 const container = document.getElementById("container");
 const papelito = document.getElementById("papelito");
 const reglaNombre = /^[a-zA-Z áéíóúñÑÁÉÍÓÚüÜ]+$/;
@@ -123,6 +211,11 @@ const bolsa = document.getElementById("bolsa");
 const btnNuevoPapelito = document.getElementById("nuevo-papelito");
 
 btnNuevoPapelito.addEventListener("click", () => {
+    if (document.querySelector('#papelito')) {
+        alert("Buena hacker!. Ya hay un papelito en la mesa así que podes usar ese");
+        return;
+    }
+
     const nuevoPapelito = document.createElement("div");
     configurarPapelito(nuevoPapelito);
     btnNuevoPapelito.style.display = "none";
@@ -148,21 +241,6 @@ bolsa.addEventListener("drop", async (event) => {
     bolsa.classList.remove("bolsa-activa");
     const idPapelito = event.dataTransfer.getData("text/plain");
     const papelito = document.getElementById(idPapelito);
-    const nombreNormalizado = limpiarAcentos(papelito.textContent.toLowerCase().trim());
 
-    if(!reglaNombre.test(nombreNormalizado)) {
-        alert(`El nombre ${nombreNormalizado} no es un nombre válido para participar del sorteo. Los nombres solo pueden tener letras y/o espacios`);
-        return;
-    }
-
-    const q = query(collection(db, "nombres"), where("nombre", "==", nombreNormalizado));
-    const consulta = await getDocs(q);
-    if (consulta.empty) {
-        await addDoc(collection(db, "nombres"), { nombre: nombreNormalizado });
-        alert(`Ingresaste ${nombreNormalizado} a la bolsa!`);
-        papelito.remove();
-        btnNuevoPapelito.style.display = "block";
-    } else {
-        alert(`${nombreNormalizado[0].toUpperCase()}${nombreNormalizado.slice(1)} ya está participando del sorteo, probá ingresar otro nombre.`);
-    };
+    await procesarPapelito(papelito);
 });

@@ -338,3 +338,68 @@ dialog::backdrop {
     transition: transform 0.1s;
     margin-bottom: 30px;
 }
+
+@media (max-width: 768px) {
+    .escritorio {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px;
+        overflow-x: hidden;
+    }
+
+    .titulo {
+        position: static;
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .estilo-papelito {
+        touch-action: none;
+    }
+
+    .zona-papelito {
+        width: 100%;
+        min-height: 40vh;
+        padding-top: 20px;
+    }
+
+    .contenedor-papelito {
+        width: 100%;
+    }
+
+    .toast-error {
+        font-size: .7rem;
+        padding: 4px 10px;
+        max-width: 90%;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        text-align: center;
+        line-height: 1.2;
+        bottom: -45px;
+
+    }
+
+   .zona-bolsa {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 30px;
+   }
+
+   .bolsa {
+    max-width: 350px;
+   }
+
+   .bolsa-activa {
+    transform: scale(1.05);
+   }
+
+   .btn-nuevo-papelito {
+    width: 80%;
+    max-width: 300px;
+    margin: 10px auto 20px auto;
+    order: -1;
+    padding: 12px;
+   }
+}
