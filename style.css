@@ -40,6 +40,8 @@ body {
     align-content: flex-start; /* Los apila desde arriba hacia abajo */
     gap: 30px; /* Espacio entre los papelitos */
     padding: 40px;
+    position: relative;
+    z-index: 10;
 }
 
 .zona-bolsa {
@@ -49,6 +51,8 @@ body {
     align-items: center;
     padding-top: 40px;
     border-right: 2px dashed rgba(255, 255, 255, 0.1); /* Una línea divisoria sutil */
+    position: relative;
+    z-index: 1;
 }
 
 .contenedor-papelito {
