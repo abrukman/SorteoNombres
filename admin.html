@@ -7,18 +7,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
+    <div id="login-container" class="contenedor-login">
+        <h2>Acceso restringido</h2>
+        <!--form id="formulario-login">
+            <div class="grupo-input">
+                <input type="email" id="admin-email" required placeholder="correo@electronico.com">
+            </div>
+            <div class="grupo-input">
+                <input type="password" id="admin-password" required placeholder="contraseña">
+            </div>
+            <button type="submit" id="btn-login" class="btn-sortear">ingresar</button>
+        </form-->
+        <button id="btn-login-google">Ingresar con Google</button>
+        <p id="login-error" class="toast-error oculto">Credenciales incorrectas.</p>
+    </div>
+    <div id="panel-admin" style="display: none;">
         <h1>Lista de participantes</h1>
         <ul id="lista-nombres" class="mesa-admin"></ul>
         <button id="sortear" class="btn-sortear">sortear</button>
+        <button id="btn-cerrar-sesion">cerrar sesión</button>
     </div>
     <dialog id="modal-ganador">
-    <div class="contenido-modal">
-        <h2 class="titulo-ganador">¡Tenemos un Ganador! 🎉</h2>
-        <p id="nombre-ganador-texto"></p> 
-        <button id="cerrar-modal">Cerrar</button>
-    </div>
-</dialog>
+        <div class="contenido-modal">
+            <h2 class="titulo-ganador">¡Tenemos un Ganador! 🎉</h2>
+            <p id="nombre-ganador-texto"></p> 
+            <button id="cerrar-modal">Cerrar</button>
+        </div>
+    </dialog>
 </body>
 <script type="module" src="admin.js"></script>
 </html>
