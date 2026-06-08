@@ -27,7 +27,7 @@ const btnLoginGoogle = document.getElementById("btn-login-google");
 const mensajeError = document.getElementById("login-error");
 const btnCerrarSesion = document.getElementById("btn-cerrar-sesion");
 
-const MI_MAIL_ADMIN = "UID";
+const MI_MAIL_ADMIN = "Kkb2Fc3L8PWaR9p7uo7pu6vaay63";
 
 btnLoginGoogle.addEventListener("click", async () => {
     try {
@@ -41,7 +41,7 @@ btnLoginGoogle.addEventListener("click", async () => {
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         console.log(user.uid);
-        if (user.email === MI_MAIL_ADMIN) {
+        if (user.uid === MI_MAIL_ADMIN) {
             // ¡Sos vos! Te dejamos pasar
             loginContainer.style.display = "none";
             panelAdmin.style.display = "block";
