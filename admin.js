@@ -40,7 +40,6 @@ btnLoginGoogle.addEventListener("click", async () => {
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        console.log(user.uid);
         if (user.uid === MI_MAIL_ADMIN) {
             // ¡Sos vos! Te dejamos pasar
             loginContainer.style.display = "none";
