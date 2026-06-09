@@ -59,9 +59,24 @@ body {
     max-width: 400px;
     margin: 100px auto;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     text-align: center;
+}
+
+#btn-login-google, #btn-cerrar-sesion {
+    background: none;
+    border: none;
+    color:#fff;
+    cursor: pointer;
+    font-size: 3rem;
+    text-shadow: 2px 2px 11px rgba(0, 0, 0, 0.4);
+}
+
+#btn-cerrar-sesion {
+    position: absolute;
+    padding: 10px;
+    top: 0;
+    right: 10px;
+    font-size: 2rem;
 }
 
 .grupo-input {
@@ -173,6 +188,10 @@ body {
 @keyframes pegarCinta {
     0% { transform: translateX(-50%) rotate(10deg) scale(1.5); opacity: 0; }
     100% { transform: translateX(-50%) rotate(3deg) scale(1); opacity: 1; }
+}
+
+#login-container .toast-error {
+    position: relative;
 }
 
 .oculto {

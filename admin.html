@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteo Admin</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/6c1a72a246.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="login-container" class="contenedor-login">
@@ -18,14 +19,14 @@
             </div>
             <button type="submit" id="btn-login" class="btn-sortear">ingresar</button>
         </form-->
-        <button id="btn-login-google">Ingresar con Google</button>
+        <button id="btn-login-google"><i class="fa-brands fa-google"></i></button>
         <p id="login-error" class="toast-error oculto">Credenciales incorrectas.</p>
     </div>
     <div id="panel-admin" style="display: none;">
         <h1>Lista de participantes</h1>
         <ul id="lista-nombres" class="mesa-admin"></ul>
         <button id="sortear" class="btn-sortear">sortear</button>
-        <button id="btn-cerrar-sesion">cerrar sesión</button>
+        <button id="btn-cerrar-sesion"><i class="fa-solid fa-power-off"></i></button>
     </div>
     <dialog id="modal-ganador">
         <div class="contenido-modal">
