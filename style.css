@@ -403,7 +403,6 @@ dialog::backdrop {
 
     .zona-papelito {
         width: 100%;
-        min-height: 40vh;
         padding-top: 20px;
     }
 
