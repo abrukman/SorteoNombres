@@ -45,7 +45,6 @@ onAuthStateChanged(auth, async (user) => {
             loginContainer.style.display = "none";
             panelAdmin.style.display = "block";
             mensajeError.classList.add("oculto");
-            window.addEventListener("DOMContentLoaded", () => escucharNombres());
         } else {
             // Es otra persona con su propio Gmail. Lo echamos.
             await signOut(auth);
@@ -146,6 +145,6 @@ btnSortear.addEventListener("click", () => {
     realizarSorteo();
 })
 
-/*window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
     escucharNombres();
-});*/
+});
